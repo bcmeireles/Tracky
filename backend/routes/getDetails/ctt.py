@@ -5,7 +5,7 @@ def create_routes(app):
     @app.route('/getTracking/ctt')
     def cttTracker():
         data = ctt.trackCTT()
-        if data['requestStatus'] == 'requestStatus':
+        if data['requestStatus'] == 'success':
             del data['requestStatus']
             return make_response(jsonify(data), 200)
         else:
