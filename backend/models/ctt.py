@@ -15,6 +15,7 @@ class CTT:
         self.reason = None
         self.receptorName = None
         self.progress = None
+        self.lastChecked = None
 
     def save(self):
         db['ctt'].insert_one(self.__dict__)

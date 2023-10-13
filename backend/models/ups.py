@@ -14,6 +14,7 @@ class UPS:
         self.location = None
         self.leftAt = None
         self.progress = None
+        self.lastChecked = None
 
     def save(self):
         db['ups'].insert_one(self.__dict__)

@@ -11,6 +11,7 @@ class PAACK:
         self.status = status
         self.description = None
         self.estimated = None
+        self.lastChecked = None
 
     def save(self):
         db['paack'].insert_one(self.__dict__)
