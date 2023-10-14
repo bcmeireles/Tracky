@@ -45,7 +45,7 @@ function Register() {
             <input type="password" placeholder='Password' className="form-control" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
           </div>
           <div className="d-grid">
-            <button onClick={(e) => signupWithUsernameAndPassword(e)} className="btn btn-primary">Register</button>
+            <button className="btn btn-primary" onClick={(e) => signupWithUsernameAndPassword(e)}>Register</button>
           </div>
           <p className='text-end mt-2'>
             Already registered? <Link to="/login" className='ms-2'>Login</Link>
