@@ -1,0 +1,57 @@
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { auth } from '../../firebase';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import './style.css'
+
+function Register() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const signupWithUsernameAndPassword = async (e) => {
+    e.preventDefault();
+
+    if (password === confirmPassword) {
+        try {
+            await createUserWithEmailAndPassword(auth, email, password);
+            console.log("Account created");
+        } catch {
+            console.log("Sorry, something went wrong. Please try again.");
+        }
+    } else {
+        console.log("Passwords don't match. Please try again.");
+    }
+  };
+
+  return (
+    <div className="register template d-flex justify-content-center align-items-center vh-100 bg-primary">
+      <div className='form_container p-5 rounded bg-white'>
+        <form>
+          <h3 className='text-center'>Register</h3>
+          <div className='mb-2'>
+            <label htmlFor="email">Email</label>
+            <input type="email" placeholder='Email' className="form-control" value={email} onChange={(e) => setEmail(e.target.value)}/>
+          </div>
+          <div className='mb-2'>
+            <label htmlFor="password">Password</label>
+            <input type="password" placeholder='Password' className="form-control" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          </div>
+          <div className='mb-2'>
+            <label htmlFor="password">Password</label>
+            <input type="password" placeholder='Password' className="form-control" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+          </div>
+          <div className="d-grid">
+            <button onClick={(e) => signupWithUsernameAndPassword(e)} className="btn btn-primary">Register</button>
+          </div>
+          <p className='text-end mt-2'>
+            Already registered? <Link to="/login" className='ms-2'>Login</Link>
+          </p>
+        </form>
+      </div>
+    </div>
+  )
+}
+
+export default Register
