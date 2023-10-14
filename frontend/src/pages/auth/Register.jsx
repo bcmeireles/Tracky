@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import './style.css'
 
 function Register() {
@@ -15,8 +15,10 @@ function Register() {
 
     if (password === confirmPassword) {
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            console.log("Account created");
+            await createUserWithEmailAndPassword(auth, email, password).then((user) => {
+              sendEmailVerification(user.user);
+              console.log("Email verification sent. Please check your email.");
+            })
         } catch {
             console.log("Sorry, something went wrong. Please try again.");
         }
