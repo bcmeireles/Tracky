@@ -4,6 +4,9 @@ import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import './style.css'
 
+import emailIcon from '../../Components/LoginSignup/Assets/email.png'
+import passwordIcon from '../../Components/LoginSignup/Assets/password.png'
+
 function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -32,17 +35,17 @@ function Register() {
       <div className='form_container p-5 rounded bg-white'>
         <form>
           <h3 className='text-center'>Register</h3>
-          <div className='mb-2'>
-            <label htmlFor="email">Email</label>
+          <div className='mb-2 input'>
+            <img src={emailIcon} alt="" className='me-2'/>
             <input type="email" placeholder='Email' className="form-control" value={email} onChange={(e) => setEmail(e.target.value)}/>
           </div>
-          <div className='mb-2'>
-            <label htmlFor="password">Password</label>
+          <div className='mb-2 input'>
+            <img src={passwordIcon} alt="" className='me-2'/>
             <input type="password" placeholder='Password' className="form-control" value={password} onChange={(e) => setPassword(e.target.value)}/>
           </div>
-          <div className='mb-2'>
-            <label htmlFor="password">Password</label>
-            <input type="password" placeholder='Password' className="form-control" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+          <div className='mb-2 input'>
+            <img src={passwordIcon} alt="" className='me-2'/>
+            <input type="password" placeholder='Confirm Password' className="form-control" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
           </div>
           <div className="d-grid">
             <button className="btn btn-primary" onClick={(e) => signupWithUsernameAndPassword(e)}>Register</button>

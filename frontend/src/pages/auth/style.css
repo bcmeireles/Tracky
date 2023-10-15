@@ -2,6 +2,12 @@
     width: 30%
 }
 
+.input {
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
 @media screen and (max-width: 1000px) {
     .form_container {
         width: 65%;

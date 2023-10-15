@@ -2,7 +2,10 @@ import React, { useState } from 'react'
 import './style.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signOut, signInWithEmailAndPassword } from 'firebase/auth';
+
+import emailIcon from '../../Components/LoginSignup/Assets/email.png'
+import passwordIcon from '../../Components/LoginSignup/Assets/password.png'
 
 function Login() {
   const navigate = useNavigate();
@@ -18,6 +21,14 @@ function Login() {
           console.log(user.user);
         } else {
           console.log('Please verify your email first.');
+          signOut(auth)
+            .then(() => {
+                // Sign-out successful.
+                console.log('Signed out successfully');
+            })
+            .catch((error) => {
+                // An error happened.
+            });
         }
       })
     } catch {
@@ -30,12 +41,12 @@ function Login() {
       <div className='form_container p-5 rounded bg-white'>
         <form>
           <h3 className='text-center'>Login</h3>
-          <div className='mb-2'>
-            <label htmlFor="email">Email</label>
+          <div className='mb-2 input'>
+            <img src={emailIcon} alt="" className='me-2'/>
             <input type="email" placeholder='Email' className="form-control" onChange={(e)=>setEmail(e.target.value)}/>
           </div>
-          <div className='mb-2'>
-            <label htmlFor="password">Password</label>
+          <div className='mb-2 input'>
+            <img src={passwordIcon} alt="" className='me-2'/>
             <input type="password" placeholder='Password' className="form-control" onChange={(e)=>setPassword(e.target.value)}/>
           </div>
           <div className="d-grid">
