@@ -3,6 +3,7 @@ from models.ctt import CTT
 from models.paack import PAACK
 from models.ups import UPS
 from models.yunexpress import YUNEXPRESS
+from models.correosexpress import CORREOSEXPRESS
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client['tracky']
@@ -43,6 +44,10 @@ def createParcel(label, uid, trackingID, courier):
         parcelObj = YUNEXPRESS(label, trackingID, uid)
         parcelObj.save()
 
+    elif courier == 'correosexpress':
+        parcelObj = CORREOSEXPRESS(label, trackingID, uid)
+        parcelObj.save()
+
     return True
 
 def deleteParcel(uid, trackingID, courier):
@@ -66,5 +71,8 @@ def updateParcel(uid, trackingID, courier, newDetails):
     elif courier == 'yunexpress':
         if uid == YUNEXPRESS.find_by_id(trackingID)['ownerUID']:
             upd = YUNEXPRESS.update(trackingID, newDetails)
+    elif courier == 'correosexpress':
+        if uid == CORREOSEXPRESS.find_by_id(trackingID)['ownerUID']:
+            upd = CORREOSEXPRESS.update(trackingID, newDetails)
     
     return upd
