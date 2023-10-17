@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
-from routes.getDetails import ctt, ups, paack, yunexpress
-from routes.getParcels import getParcels
+from routes.getTracking import ctt, ups, paack, yunexpress
+from routes.parcels import getParcels, createParcel, deleteParcel
 
 app = Flask(__name__)
 CORS(app)
@@ -12,6 +12,8 @@ paack.create_routes(app)
 yunexpress.create_routes(app)
 
 getParcels.create_routes(app)
+createParcel.create_routes(app)
+deleteParcel.create_routes(app)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -31,7 +31,7 @@ function Home() {
                 // User is signed in.
                 setUser(user);
 
-                fetch(`http://127.0.0.1:5000/getParcels?uid=${user.uid}`).then(response => {
+                fetch(`http://127.0.0.1:5000/parcels/get?uid=${user.uid}`).then(response => {
                     return response.json();
                 }).then(data => {
                     console.log(data);
