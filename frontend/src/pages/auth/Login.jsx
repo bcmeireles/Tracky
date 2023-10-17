@@ -4,9 +4,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase';
 import { signOut, signInWithEmailAndPassword } from 'firebase/auth';
 
-import emailIcon from '../../assets/email.png'
-import passwordIcon from '../../assets/password.png'
-
 import { toast } from 'react-toastify';
 
 function Login() {
@@ -44,11 +41,13 @@ function Login() {
         <form>
           <h3 className='text-center'>Login</h3>
           <div className='mb-2 input'>
-            <img src={emailIcon} alt="" className='me-2'/>
+            {/* <img src={emailIcon} alt="" className='me-2'/> */}
+            <i className='fa fa-envelope me-2' style={{'font-size':'24px'}}></i>
             <input type="email" placeholder='Email' className="form-control" onChange={(e)=>setEmail(e.target.value)}/>
           </div>
           <div className='mb-2 input'>
-            <img src={passwordIcon} alt="" className='me-2'/>
+            {/* <img src={passwordIcon} alt="" className='me-2'/> */}
+            <i className='fa fa-lock me-2' style={{'font-size':'36px'}}></i>
             <input type="password" placeholder='Password' className="form-control" onChange={(e)=>setPassword(e.target.value)}/>
           </div>
           <div className="d-grid">

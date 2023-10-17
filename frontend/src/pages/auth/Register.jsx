@@ -4,9 +4,6 @@ import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import './style.css'
 
-import emailIcon from '../../assets/email.png'
-import passwordIcon from '../../assets/password.png'
-
 import { toast } from 'react-toastify';
 
 function Register() {
@@ -39,15 +36,18 @@ function Register() {
         <form>
           <h3 className='text-center'>Register</h3>
           <div className='mb-2 input'>
-            <img src={emailIcon} alt="" className='me-2'/>
+            {/* <img src={emailIcon} alt="" className='me-2'/> */}
+            <i className='fa fa-envelope me-2' style={{'font-size':'24px'}}></i>
             <input type="email" placeholder='Email' className="form-control" value={email} onChange={(e) => setEmail(e.target.value)}/>
           </div>
           <div className='mb-2 input'>
-            <img src={passwordIcon} alt="" className='me-2'/>
+            {/* <img src={passwordIcon} alt="" className='me-2'/> */}
+            <i className='fa fa-lock me-2' style={{'font-size':'36px'}}></i>
             <input type="password" placeholder='Password' className="form-control" value={password} onChange={(e) => setPassword(e.target.value)}/>
           </div>
           <div className='mb-2 input'>
-            <img src={passwordIcon} alt="" className='me-2'/>
+            {/* <img src={passwordIcon} alt="" className='me-2'/> */}
+            <i className='fa fa-lock me-2' style={{'font-size':'36px'}}></i>
             <input type="password" placeholder='Confirm Password' className="form-control" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
           </div>
           <div className="d-grid">
