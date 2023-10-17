@@ -4,7 +4,8 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['tracky']
 
 class PAACK:
-    def __init__(self, trackingID, postalCode, ownerUID, status="unverified"):
+    def __init__(self, label, trackingID, postalCode, ownerUID, status="unverified"):
+        self.label = label
         self.trackingID = trackingID
         self.postalCode = postalCode
         self.ownerUID = ownerUID

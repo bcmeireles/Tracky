@@ -26,21 +26,21 @@ def getParcel(uid, trackingID):
 
     return None
 
-def createParcel(uid, trackingID, courier):
+def createParcel(label, uid, trackingID, courier):
     if courier == 'ctt':
-        parcelObj = CTT(trackingID, uid)
+        parcelObj = CTT(label, trackingID, uid)
         parcelObj.save()
     
     elif courier == 'paack':
-        parcelObj = PAACK(trackingID, uid)
+        parcelObj = PAACK(label, trackingID, uid)
         parcelObj.save()
 
     elif courier == 'ups':
-        parcelObj = UPS(trackingID, uid)
+        parcelObj = UPS(label, trackingID, uid)
         parcelObj.save()
 
     elif courier == 'yunexpress':
-        parcelObj = YUNEXPRESS(trackingID, uid)
+        parcelObj = YUNEXPRESS(label, trackingID, uid)
         parcelObj.save()
 
     return True

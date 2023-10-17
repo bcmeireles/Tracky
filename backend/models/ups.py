@@ -4,7 +4,8 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['tracky']
 
 class UPS:
-    def __init__(self, trackingID, ownerUID, status="unverified"):
+    def __init__(self, label, trackingID, ownerUID, status="unverified"):
+        self.label = label
         self.trackingID = trackingID
         self.ownerUID = ownerUID
         self.courier = "ups"
