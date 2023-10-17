@@ -8,6 +8,7 @@ class PAACK:
         self.trackingID = trackingID
         self.postalCode = postalCode
         self.ownerUID = ownerUID
+        self.courier = "paack"
         self.status = status
         self.description = None
         self.estimated = None

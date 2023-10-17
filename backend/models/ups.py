@@ -7,6 +7,7 @@ class UPS:
     def __init__(self, trackingID, ownerUID, status="unverified"):
         self.trackingID = trackingID
         self.ownerUID = ownerUID
+        self.courier = "ups"
         self.status = status
         self.lastUpdateDate = None
         self.lastUpdateTime = None

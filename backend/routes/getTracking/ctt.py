@@ -1,10 +1,10 @@
 from flask import jsonify, make_response
-from scrapers import ctt
+from scrapers import ctt as cttScraper
 
 def create_routes(app):
     @app.route('/getTracking/ctt')
     def cttTracker():
-        data = ctt.trackCTT()
+        data = cttScraper.trackCTT()
         if data['requestStatus'] == 'success':
             del data['requestStatus']
             return make_response(jsonify(data), 200)

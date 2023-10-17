@@ -7,6 +7,7 @@ class YUNEXPRESS:
     def __init__(self, trackingID, ownerUID, status="unverified"):
         self.trackingID = trackingID
         self.ownerUID = ownerUID
+        self.courier = "yunexpress"
         self.status = status
         self.lastUpdateDate = None
         self.lastUpdateTime = None
@@ -19,6 +20,8 @@ class YUNEXPRESS:
 
     @classmethod
     def update(cls, trackingID, newDetails):
+        if 'requestStatus' in newDetails.keys():
+            del newDetails['requestStatus']
         db['yunexpress'].update_one({'trackingID': trackingID}, {'$set': newDetails})
 
     @classmethod

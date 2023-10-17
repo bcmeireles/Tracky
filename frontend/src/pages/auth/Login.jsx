@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase';
 import { signOut, signInWithEmailAndPassword } from 'firebase/auth';
 
-import emailIcon from '../../Components/LoginSignup/Assets/email.png'
-import passwordIcon from '../../Components/LoginSignup/Assets/password.png'
+import emailIcon from '../../assets/email.png'
+import passwordIcon from '../../assets/password.png'
 
 function Login() {
   const navigate = useNavigate();

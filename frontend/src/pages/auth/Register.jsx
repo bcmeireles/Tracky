@@ -4,8 +4,8 @@ import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import './style.css'
 
-import emailIcon from '../../Components/LoginSignup/Assets/email.png'
-import passwordIcon from '../../Components/LoginSignup/Assets/password.png'
+import emailIcon from '../../assets/email.png'
+import passwordIcon from '../../assets/password.png'
 
 function Register() {
   const navigate = useNavigate();
