@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import json
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client['tracky']
@@ -23,7 +24,11 @@ class YUNEXPRESS:
     def update(cls, trackingID, newDetails):
         if 'requestStatus' in newDetails.keys():
             del newDetails['requestStatus']
-        db['yunexpress'].update_one({'trackingID': trackingID}, {'$set': newDetails})
+        try:
+            db['yunexpress'].update_one({'trackingID': trackingID}, {'$set': json.loads(newDetails)})
+            return True
+        except:
+            return False
 
     @classmethod
     def find_by_id(cls, trackingID):

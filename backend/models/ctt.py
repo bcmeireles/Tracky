@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import json
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client['tracky']
@@ -24,7 +25,11 @@ class CTT:
 
     @classmethod
     def update(cls, trackingID, newDetails):
-        db['ctt'].update_one({'trackingID': trackingID}, {'$set': newDetails})
+        try:    
+            db['ctt'].update_one({'trackingID': trackingID}, {'$set': json.loads(newDetails)})
+            return True
+        except:
+            return False
 
     @classmethod
     def find_by_id(cls, trackingID):

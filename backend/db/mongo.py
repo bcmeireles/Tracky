@@ -51,3 +51,20 @@ def deleteParcel(uid, trackingID, courier):
         return True
     except:
         return False
+    
+def updateParcel(uid, trackingID, courier, newDetails):
+    upd = False
+    if courier == 'ctt':
+        if uid == CTT.find_by_id(trackingID)['ownerUID']:
+            upd = CTT.update(trackingID, newDetails)
+    elif courier == 'paack':
+        if uid == PAACK.find_by_id(trackingID)['ownerUID']:
+            upd = PAACK.update(trackingID, newDetails)
+    elif courier == 'ups':
+        if uid == UPS.find_by_id(trackingID)['ownerUID']:
+            upd = UPS.update(trackingID, newDetails)
+    elif courier == 'yunexpress':
+        if uid == YUNEXPRESS.find_by_id(trackingID)['ownerUID']:
+            upd = YUNEXPRESS.update(trackingID, newDetails)
+    
+    return upd

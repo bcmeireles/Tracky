@@ -2,7 +2,7 @@ from db import mongo
 from flask import jsonify, make_response, request
 
 def create_routes(app):
-    @app.route('/deleteParcel', methods=['POST'])
+    @app.route('/parcels/delete', methods=['DELETE'])
     def deleteParcel():
         uid = request.form.get('uid')
         trackingID = request.form.get('trackingID')
