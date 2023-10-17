@@ -44,7 +44,7 @@ function Home() {
 
     return (
         <div>
-            <p>Welcome {user ? user.uid : 'anon'} you have {parcels.length} parcel(s) being tracked</p>
+            <p>Welcome {user ? user.uid : 'anon'} you have {parcels.length} {parcels.length === 1 ? 'parcel' : 'parcels'} being tracked</p>
             <button onClick={handleLogout}>Logout</button>
 
             <ParcelContainer parcels={parcels} />
