@@ -7,6 +7,8 @@ import './style.css'
 import emailIcon from '../../assets/email.png'
 import passwordIcon from '../../assets/password.png'
 
+import { toast } from 'react-toastify';
+
 function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -20,13 +22,14 @@ function Register() {
         try {
             await createUserWithEmailAndPassword(auth, email, password).then((user) => {
               sendEmailVerification(user.user);
-              console.log("Email verification sent. Please check your email.");
+              toast.info("Email verification sent. Please check your email.");
+              navigate('/login');
             })
         } catch {
-            console.log("Sorry, something went wrong. Please try again.");
+            toast.error("Sorry, something went wrong. Please try again.");
         }
     } else {
-        console.log("Passwords don't match. Please try again.");
+        toast.error("Passwords don't match. Please try again.");
     }
   };
 

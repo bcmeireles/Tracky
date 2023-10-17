@@ -7,6 +7,8 @@ import { signOut, signInWithEmailAndPassword } from 'firebase/auth';
 import emailIcon from '../../assets/email.png'
 import passwordIcon from '../../assets/password.png'
 
+import { toast } from 'react-toastify';
+
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -18,26 +20,26 @@ function Login() {
       await signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
         if (user.user.emailVerified) {
-          console.log(user.user);
+          toast.success('Successfully logged in.');
+          navigate('/home')
         } else {
-          console.log('Please verify your email first.');
+          toast.info('Please verify your email first.');
           signOut(auth)
             .then(() => {
-                // Sign-out successful.
-                console.log('Signed out successfully');
+                //
             })
             .catch((error) => {
-                // An error happened.
+              toast.error(error.message);
             });
         }
       })
     } catch {
-      console.log('Sorry, something went wrong. Please try again.');
+      toast.error('Sorry, something went wrong. Please try again.');
     }
   }
 
   return (
-    <div className="login template d-flex justify-content-center align-items-center vh-100 bg-primary">
+    <div className="login template d-flex justify-content-center align-items-center vh-100 bg-black">
       <div className='form_container p-5 rounded bg-white'>
         <form>
           <h3 className='text-center'>Login</h3>

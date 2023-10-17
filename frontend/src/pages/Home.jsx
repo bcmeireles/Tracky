@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import ParcelItem from '../components/ParcelItem';
 import ParcelContainer from '../components/ParcelContainer';
 
+import { toast } from 'react-toastify';
+
 function Home() {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
@@ -17,10 +19,10 @@ function Home() {
             .then(() => {
                 // Sign-out successful.
                 navigate('/login');
-                console.log('Signed out successfully');
+                toast.success('Signed out successfully');
             })
             .catch((error) => {
-                // An error happened.
+                toast.error(error.message);
             });
     };
 
@@ -28,24 +30,17 @@ function Home() {
         const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // User is signed in.
                 setUser(user);
-
                 fetch(`http://127.0.0.1:5000/parcels/get?uid=${user.uid}`).then(response => {
                     return response.json();
                 }).then(data => {
-                    console.log(data);
                     setParcels(data.parcels);
                 });
-
             } else {
-                // No user is signed in.
                 setUser(null);
             }
         });
     }, []);
-
-    
 
     return (
         <div>
