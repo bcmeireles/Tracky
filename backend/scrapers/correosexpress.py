@@ -42,10 +42,12 @@ def trackCORREOSEXPRESS(trackingID=""):
 
     if "ENTREGADO" in statusOG:
         status = "delivered"
-    elif "ADMITIDO" in statusOG or "EN REPARTO" in statusOG:
+    elif "ADMITIDO" in statusOG:
         status = "confirmed"
-    else:
+    elif "EN REPARTO" in statusOG or "EN DESTINO" in statusOG:
         status = "in transit"
+    else:
+        status = statusOG
 
     return {
         "requestStatus": "success",
