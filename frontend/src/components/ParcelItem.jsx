@@ -69,7 +69,7 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel }) => {
   const calculateProgress = () => {
     if (parcel.progress !== undefined) {
       return parcel.progress; // Use the provided progress value
-    } else if (parcel.status === 'confirmed' || parcel.status === 'waiting') {
+    } else if (parcel.status === 'confirmed' || parcel.status === 'waiting' || parcel.status === 'unverified') {
       return 0;
     } else if (parcel.status === 'intransit') {
       return 50;
@@ -121,12 +121,18 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel }) => {
 
   const timeAgo = calculateTimeAgo();
 
+  const trackingLinkBuilder = (courier, trackingID) => {
+    if (courier === 'ctt') {
+      return `https://appserver.ctt.pt/CustomerArea/PublicArea_Detail?IsFromPublicArea=true&ObjectCodeInput=${trackingID}&SearchInput=${trackingID}`
+    }
+  }
+
   return (
     <div className="bg-white p-4 rounded-lg shadow-md mb-4 flex flex-col justify-between p-30">
       <h3 className="text-xl font-semibold mb-2 relative text-center flex items-center">
         <img src={`/${parcel.courier}.png`} alt={parcel.courier} className="mr-2 courier-logo" /> {parcel.label}
         <div className='absolute top-0 right-0'>
-          <a href='' target="_blank" rel="noopener noreferrer">
+          <a href={trackingLinkBuilder(parcel.courier, parcel.trackingID)} target="_blank" rel="noopener noreferrer">
             <i className="fa fa-external-link text-gray-600 hover:text-blue-500" style={{ cursor: 'pointer' }}></i>
           </a>
         </div>
