@@ -5,7 +5,7 @@ import ParcelItem from './ParcelItem'
 function ParcelContainer({parcels}) {
   return (
     
-    <div className="container vh-100 m-0">
+    <div className="container h-screen m-0">
         {parcels.map((parcel, index) => (
               <ParcelItem key={index} parcel={parcel} />
             ))}

@@ -7,12 +7,9 @@ const getFieldLabel = (fieldName) => {
 
 const ParcelItem = ({ parcel }) => {
   return (
-    <div className="card mb-4">
-      <div className="icon-container p-2">
-        <div className="loading-icon perpetuum-mobile"></div>
-      </div>
-      <div className="description p-2 d-flex flex-column">
-        <h2 className='name text-center'>{parcel.label}</h2>
+    <div className="card bg-white shadow-md rounded-md p-4 mb-4">
+      <div className="flex flex-col">
+        <h2 className='text-center text-lg font-bold'>{parcel.label}</h2>
         {Object.keys(parcel).map((field, index) => (
           field !== "label" && field !== "_id" && field !== "ownerUID" &&
           <p key={index} className='mb-1'>{getFieldLabel(field)}: {parcel[field]}</p>
