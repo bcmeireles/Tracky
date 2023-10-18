@@ -4,9 +4,10 @@ from flask import jsonify, make_response, request
 def create_routes(app):
     @app.route('/parcels/delete', methods=['DELETE'])
     def deleteParcel():
-        uid = request.form.get('uid')
-        trackingID = request.form.get('trackingID')
-        courier = request.form.get('courier')
+        data = request.get_json()
+        uid = data.get('uid')
+        trackingID = data.get('trackingID')
+        courier = data.get('courier')
 
         if not uid or not trackingID or not courier:
             return make_response(jsonify({"requestStatus": "error", "message": "Missing parameters."}), 400)

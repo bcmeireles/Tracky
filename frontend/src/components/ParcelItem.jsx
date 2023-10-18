@@ -35,6 +35,34 @@ const ParcelItem = ({ parcel }) => {
     }
   };
 
+  const handleDeleteClick = async () => {
+    const deleteUrl = 'http://127.0.0.1:5000/parcels/delete';
+
+    const myToast = toast.loading("Please wait...")
+
+    try {
+      const response = await fetch(deleteUrl, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          trackingID: parcel.trackingID,
+          uid: parcel.ownerUID,
+          courier: parcel.courier,
+        }),
+      });
+
+      if (response.ok) {
+        toast.update(myToast, { render: "Parcel deleted successfully!", type: "success", isLoading: false, autoClose: 2000 });
+      } else {
+        toast.update(myToast, { render: "Parcel deletion failed. Please try again.", type: "error", isLoading: false, autoClose: 2000 });
+      }
+    } catch (error) {
+      toast.update(myToast, { render: "An error occurred while deleting the parcel.", type: "error", isLoading: false, autoClose: 2000 });
+    }
+  };
+
   return (
     <div className="card bg-white shadow-md rounded-md p-4 mb-4">
       <div className="flex flex-col">
@@ -44,6 +72,7 @@ const ParcelItem = ({ parcel }) => {
           <p key={index} className='mb-1'>{getFieldLabel(field)}: {parcel[field]}</p>
         ))}
         <button onClick={handleUpdateClick}>Update</button>
+        <button onClick={handleDeleteClick}>Delete</button>
       </div>
     </div>
   );
