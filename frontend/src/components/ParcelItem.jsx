@@ -122,20 +122,15 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel }) => {
   const timeAgo = calculateTimeAgo();
 
   return (
-    // <div className="card bg-white shadow-md rounded-md p-4 mb-4">
-    //   <div className="flex flex-col">
-    //     <h2 className='text-center text-lg font-bold'>{parcel.label}</h2>
-    //     {Object.keys(parcel).map((field, index) => (
-    //       field !== "label" && field !== "_id" && field !== "ownerUID" &&
-    //       <p key={index} className='mb-1'>{getFieldLabel(field)}: {parcel[field]}</p>
-    //     ))}
-    //     <button onClick={handleUpdateClick}>Update</button>
-    //     <button onClick={handleDeleteClick}>Delete</button>
-    //   </div>
-    // </div>
-
     <div className="bg-white p-4 rounded-lg shadow-md mb-4 flex flex-col justify-between p-30">
-      <h3 className="text-xl font-semibold mb-2">{parcel.label}</h3>
+      <h3 className="text-xl font-semibold mb-2 relative text-center flex items-center">
+        <img src={`/${parcel.courier}.png`} alt={parcel.courier} className="mr-2 courier-logo" /> {parcel.label}
+        <div className='absolute top-0 right-0'>
+          <a href='' target="_blank" rel="noopener noreferrer">
+            <i className="fa fa-external-link text-gray-600 hover:text-blue-500" style={{ cursor: 'pointer' }}></i>
+          </a>
+        </div>
+      </h3>
       <div className="mb-2">
          {parcel.lastUpdateDate && <p><strong>Last Update Date</strong>: {parcel.lastUpdateDate}</p>}
          {parcel.lastUpdateTime && <p><strong>Last Update Time</strong>: {parcel.lastUpdateTime}</p>}
@@ -158,7 +153,10 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel }) => {
         >
           Update
         </button>
-        <div className="text-sm text-gray-600">Last checked {timeAgo}</div>
+        <div className="text-sm text-gray-600 ml-auto">
+          <div className="text-center">Last checked</div>
+          <div className="text-center">{timeAgo}</div>
+        </div>
       </div>
       <div className={`h-4 mt-4 relative ${getProgressColorClass(1)} rounded-lg`}>
         <div
