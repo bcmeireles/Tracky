@@ -6,8 +6,9 @@ import time
 def create_routes(app):
     @app.route('/updateTracking/ctt', methods=['POST'])
     def cttUpdater():
-        uid = request.form.get('uid')
-        trackingID = request.form.get('trackingID')
+        data = request.get_json()
+        uid = data.get('uid')
+        trackingID = data.get('trackingID')
 
         data = cttScraper.trackCTT(trackingID)
         if data['requestStatus'] == 'success':

@@ -6,8 +6,9 @@ import time
 def create_routes(app):
     @app.route('/updateTracking/paack', methods=['POST'])
     def paackUpdater():
-        uid = request.form.get('uid')
-        trackingID = request.form.get('trackingID')
+        data = request.get_json()
+        uid = data.get('uid')
+        trackingID = data.get('trackingID')
 
         data = paackScraper.trackPaack(trackingID)
         if data['requestStatus'] == 'success':

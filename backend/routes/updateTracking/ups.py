@@ -6,8 +6,9 @@ import time
 def create_routes(app):
     @app.route('/updateTracking/ups', methods=['POST'])
     def upsUpdater():
-        uid = request.form.get('uid')
-        trackingID = request.form.get('trackingID')
+        data = request.get_json()
+        uid = data.get('uid')
+        trackingID = data.get('trackingID')
 
         data = upsScraper.trackUPS(trackingID)
         if data['requestStatus'] == 'success':

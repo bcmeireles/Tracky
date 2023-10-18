@@ -6,8 +6,9 @@ import time
 def create_routes(app):
     @app.route('/updateTracking/yunexpress', methods=['POST'])
     def yunexpressUpdater():
-        uid = request.form.get('uid')
-        trackingID = request.form.get('trackingID')
+        data = request.get_json()
+        uid = data.get('uid')
+        trackingID = data.get('trackingID')
 
         data = yunexpressScraper.trackYunexpress(trackingID)
         if data['requestStatus'] == 'success':
