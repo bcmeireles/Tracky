@@ -19,18 +19,3 @@ class CORREOSEXPRESS:
 
     def save(self):
         db['correosexpress'].insert_one(self.__dict__)
-
-    @classmethod
-    def update(cls, trackingID, newDetails):
-        try:    
-            db['correosexpress'].update_one({'trackingID': trackingID}, {'$set': json.loads(newDetails)})
-            return True
-        except:
-            return False
-
-    @classmethod
-    def find_by_id(cls, trackingID):
-        package_data = db['correosexpress'].find_one({'trackingID': trackingID})
-        if package_data:
-            return package_data
-        return None

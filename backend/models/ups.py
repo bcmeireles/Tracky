@@ -21,14 +21,3 @@ class UPS:
 
     def save(self):
         db['ups'].insert_one(self.__dict__)
-
-    @classmethod
-    def update(cls, trackingID, newDetails):
-        db['ups'].update_one({'trackingID': trackingID}, {'$set': json.loads(newDetails)})
-
-    @classmethod
-    def find_by_id(cls, trackingID):
-        package_data = db['ups'].find_one({'trackingID': trackingID})
-        if package_data:
-            return package_data
-        return None

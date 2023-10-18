@@ -22,18 +22,3 @@ class CTT:
 
     def save(self):
         db['ctt'].insert_one(self.__dict__)
-
-    @classmethod
-    def update(cls, trackingID, newDetails):
-        try:    
-            db['ctt'].update_one({'trackingID': trackingID}, {'$set': json.loads(newDetails)})
-            return True
-        except:
-            return False
-
-    @classmethod
-    def find_by_id(cls, trackingID):
-        package_data = db['ctt'].find_one({'trackingID': trackingID})
-        if package_data:
-            return package_data
-        return None

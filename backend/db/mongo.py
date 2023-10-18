@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import json
 from models.ctt import CTT
 from models.paack import PAACK
 from models.ups import UPS
@@ -57,22 +58,17 @@ def deleteParcel(uid, trackingID, courier):
     except:
         return False
     
+
 def updateParcel(uid, trackingID, courier, newDetails):
-    upd = False
-    if courier == 'ctt':
-        if uid == CTT.find_by_id(trackingID)['ownerUID']:
-            upd = CTT.update(trackingID, newDetails)
-    elif courier == 'paack':
-        if uid == PAACK.find_by_id(trackingID)['ownerUID']:
-            upd = PAACK.update(trackingID, newDetails)
-    elif courier == 'ups':
-        if uid == UPS.find_by_id(trackingID)['ownerUID']:
-            upd = UPS.update(trackingID, newDetails)
-    elif courier == 'yunexpress':
-        if uid == YUNEXPRESS.find_by_id(trackingID)['ownerUID']:
-            upd = YUNEXPRESS.update(trackingID, newDetails)
-    elif courier == 'correosexpress':
-        if uid == CORREOSEXPRESS.find_by_id(trackingID)['ownerUID']:
-            upd = CORREOSEXPRESS.update(trackingID, newDetails)
-    
-    return upd
+    try:    
+        db[courier].update_one({'trackingID': trackingID}, {'$set': newDetails})
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+def find_by_id(trackingID, courier):
+    package_data = db[courier].find_one({'trackingID': trackingID})
+    if package_data:
+        return package_data
+    return None
