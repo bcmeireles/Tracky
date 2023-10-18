@@ -33,6 +33,9 @@ def trackCORREOSEXPRESS(trackingID=""):
 
     soup = BeautifulSoup(response.content, 'html.parser')
 
+    with open("debug.html", "w") as f:
+        f.write(response.text)
+
     first_tr = soup.find('tbody').find('tr')
     td_elements = first_tr.find_all('td')
 
@@ -42,7 +45,7 @@ def trackCORREOSEXPRESS(trackingID=""):
 
     if "ENTREGADO" in statusOG:
         status = "delivered"
-    elif "ADMITIDO" in statusOG:
+    elif "ADMITIDO" in statusOG or "INFORMADO" in statusOG:
         status = "confirmed"
     elif "EN REPARTO" in statusOG or "EN DESTINO" in statusOG:
         status = "in transit"
