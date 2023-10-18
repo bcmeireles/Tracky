@@ -28,17 +28,25 @@ def trackUPS(trackingID=''):
 
     response = requests.post(url, headers=headers, json=data)
 
-    print(response.json())
-
     if response.status_code == 200:
         orderData = response.json()['trackDetails'][0]
         orderProgress = orderData['shipmentProgressActivities'][0]
+
+        status = orderData['packageStatus']
+        
+        if status == "ENTREGUE":
+            status = "delivered"
+        elif "O expedidor criou uma etiqueta" in status:
+            status = "waiting"
+        else:
+            #"Saiu para Entrega" in status or ("Chegou " in status and "Instala" in status)
+            status = "intransit"
 
         return {
             "requestStatus": "success",
             "lastUpdateDate": orderProgress['date'],
             "lastUpdateTime": orderProgress['time'],
-            "status": orderData['packageStatus'],
+            "status": status,
             "description": orderProgress['activityScan'],
             "location": orderProgress['location'],
             "leftAt": orderData['leftAt'],

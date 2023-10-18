@@ -45,10 +45,10 @@ def trackCORREOSEXPRESS(trackingID=""):
 
     if "ENTREGADO" in statusOG:
         status = "delivered"
-    elif "ADMITIDO" in statusOG or "INFORMADO" in statusOG:
-        status = "confirmed"
+    elif statusOG in ["INFORMADO", "ADMITIDO"] in statusOG:
+        status = "waiting"
     elif "EN REPARTO" in statusOG or "EN DESTINO" in statusOG:
-        status = "in transit"
+        status = "intransit"
     else:
         status = statusOG
 

@@ -31,15 +31,24 @@ def trackYunexpress(trackingID='CT108157302DE'):
 
     if response.status_code == 200:
 
+        print(response.json())
+
         orderData = response.json()['ResultList'][0]
         orderProgress = orderData['TrackInfo']['LastTrackEvent']
         date, time = orderProgress['ProcessDate'].split('T')
+
+        status = orderData['TrackData']['TrackStatus']
+
+        if status in ['Shipment information received', 'The instruction data for this shipment have been provided by the sender to DHL electronically']:
+            status = 'waiting'
+        elif status in ['Delivered to local carrier']:
+            status = 'intransit'
 
         return {
             "requestStatus": "success",
             "lastUpdateDate": date,
             "lastUpdateTime": time,
-            "status": orderData['TrackData']['TrackStatus'],
+            "status": status,
             "description": orderProgress['ProcessContent'],
             "location": orderProgress['ProcessLocation']
         }
