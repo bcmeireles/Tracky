@@ -66,16 +66,105 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel }) => {
     }
   };
 
+  const calculateProgress = () => {
+    if (parcel.progress !== undefined) {
+      return parcel.progress; // Use the provided progress value
+    } else if (parcel.status === 'confirmed' || parcel.status === 'waiting') {
+      return 0;
+    } else if (parcel.status === 'intransit') {
+      return 50;
+    } else if (parcel.status === 'delivered') {
+      return 100;
+    }
+    console.log(parcel.label)
+    return 50; // Default to 0 if no matching criteria found
+  };
+
+  const progressValue = calculateProgress();
+
+  const getProgressColorClass = (mode) => {
+    if (progressValue == 0) {
+      if (mode === 0) {
+        return 'bg-red-500';
+      } else {
+        return 'bg-red-100'
+      }
+    } else if (progressValue == 100) {
+      if (mode === 0) {
+        return 'bg-green-500';
+      } else {
+        return 'bg-green-100'
+      }
+    }
+    if (mode === 0) {
+      return 'bg-yellow-500';
+    } else {
+      return 'bg-yellow-100'
+    }
+  };
+
+  const calculateTimeAgo = () => {
+    const now = new Date();
+    const lastCheckedTime = new Date(parcel.lastChecked * 1000); // Convert seconds to milliseconds
+    const diffMs = now - lastCheckedTime;
+    const seconds = Math.floor(diffMs / 1000);
+    if (seconds < 60) {
+      return `${seconds} seconds ago`;
+    }
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) {
+      return `${minutes} minutes ago`;
+    }
+    const hours = Math.floor(minutes / 60);
+    return `${hours} hours ago`;
+  };
+
+  const timeAgo = calculateTimeAgo();
+
   return (
-    <div className="card bg-white shadow-md rounded-md p-4 mb-4">
-      <div className="flex flex-col">
-        <h2 className='text-center text-lg font-bold'>{parcel.label}</h2>
-        {Object.keys(parcel).map((field, index) => (
-          field !== "label" && field !== "_id" && field !== "ownerUID" &&
-          <p key={index} className='mb-1'>{getFieldLabel(field)}: {parcel[field]}</p>
-        ))}
-        <button onClick={handleUpdateClick}>Update</button>
-        <button onClick={handleDeleteClick}>Delete</button>
+    // <div className="card bg-white shadow-md rounded-md p-4 mb-4">
+    //   <div className="flex flex-col">
+    //     <h2 className='text-center text-lg font-bold'>{parcel.label}</h2>
+    //     {Object.keys(parcel).map((field, index) => (
+    //       field !== "label" && field !== "_id" && field !== "ownerUID" &&
+    //       <p key={index} className='mb-1'>{getFieldLabel(field)}: {parcel[field]}</p>
+    //     ))}
+    //     <button onClick={handleUpdateClick}>Update</button>
+    //     <button onClick={handleDeleteClick}>Delete</button>
+    //   </div>
+    // </div>
+
+    <div className="bg-white p-4 rounded-lg shadow-md mb-4 flex flex-col justify-between p-30">
+      <h3 className="text-xl font-semibold mb-2">{parcel.label}</h3>
+      <div className="mb-2">
+         {parcel.lastUpdateDate && <p><strong>Last Update Date</strong>: {parcel.lastUpdateDate}</p>}
+         {parcel.lastUpdateTime && <p><strong>Last Update Time</strong>: {parcel.lastUpdateTime}</p>}
+         {parcel.location && <p><strong>Location</strong>: {parcel.location}</p>}
+         {parcel.description && <p><strong>Description</strong>: {parcel.description}</p>}
+         {parcel.leftAt && <p><strong>Left At</strong>: {parcel.leftAt}</p>}
+         {parcel.receptorName && <p><strong>Receptor Name</strong>: {parcel.receptorName}</p>}
+         {parcel.reason && <p><strong>Reason</strong>: {parcel.reason}</p>}
+      </div>
+      <div className="mt-4 flex">
+        <button
+          className="bg-red-500 text-white px-3 py-1 rounded-lg mr-2"
+          onClick={() => handleDeleteClick(parcel.id)}
+        >
+          Delete
+        </button>
+        <button
+          className="bg-blue-500 text-white px-3 py-1 rounded-lg"
+          onClick={() => handleUpdateClick(parcel.id)}
+        >
+          Update
+        </button>
+        <div className="text-sm text-gray-600">Last checked {timeAgo}</div>
+      </div>
+      <div className={`h-4 mt-4 relative ${getProgressColorClass(1)} rounded-lg`}>
+        <div
+          className={`h-full ${getProgressColorClass(0)} rounded-lg`}
+          style={{ width: `${progressValue}%` }}
+        ></div>
       </div>
     </div>
   );
