@@ -37,7 +37,7 @@ function Home() {
             };
     
             // Send a POST request to create the parcel
-            fetch('http://127.0.0.1:5000/parcels/create', {
+            fetch('http://localhost:5000/parcels/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

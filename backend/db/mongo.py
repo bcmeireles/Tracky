@@ -1,14 +1,14 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-import json
+
+client = MongoClient('mongodb://tracky-mongo-container-1:27017/')
+db = client['tracky']
+
 from models.ctt import CTT
 from models.paack import PAACK
 from models.ups import UPS
 from models.yunexpress import YUNEXPRESS
 from models.correosexpress import CORREOSEXPRESS
-
-client = MongoClient('mongodb://localhost:27017/')
-db = client['tracky']
 
 def getAllParcels(uid):
     parcels = []

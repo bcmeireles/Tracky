@@ -1,7 +1,6 @@
 from pymongo import MongoClient
-import json
+from db.mongo import client
 
-client = MongoClient('mongodb://localhost:27017/')
 db = client['tracky']
 
 class YUNEXPRESS:

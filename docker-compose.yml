@@ -1,0 +1,25 @@
+version: '3.1'
+services:
+  mongo-container:
+    image: mongo:7.0.2
+    ports:
+      - "27017:27017"
+    command: mongod
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo-container
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend  

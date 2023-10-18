@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 import json
-
-client = MongoClient('mongodb://localhost:27017/')
+from db.mongo import client
 db = client['tracky']
 
 class CORREOSEXPRESS:
