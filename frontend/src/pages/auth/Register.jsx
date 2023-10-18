@@ -31,35 +31,56 @@ function Register() {
   };
 
   return (
-    <div className="register template d-flex justify-content-center align-items-center vh-100 bg-primary">
+    <div className="register flex justify-center items-center min-h-screen bg-primary">
       <div className='form_container p-5 rounded bg-white'>
         <form>
           <h3 className='text-center'>Register</h3>
-          <div className='mb-2 input'>
-            {/* <img src={emailIcon} alt="" className='me-2'/> */}
-            <i className='fa fa-envelope me-2' style={{'font-size':'24px'}}></i>
-            <input type="email" placeholder='Email' className="form-control" value={email} onChange={(e) => setEmail(e.target.value)}/>
+          <div className='mb-2'>
+            <i className='fa fa-envelope me-2 text-2xl'></i>
+            <input
+              type="email"
+              placeholder='Email'
+              className="form-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
-          <div className='mb-2 input'>
-            {/* <img src={passwordIcon} alt="" className='me-2'/> */}
-            <i className='fa fa-lock me-2' style={{'font-size':'36px'}}></i>
-            <input type="password" placeholder='Password' className="form-control" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <div className='mb-2'>
+            <i className='fa fa-lock me-2 text-3xl'></i>
+            <input
+              type="password"
+              placeholder='Password'
+              className="form-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
-          <div className='mb-2 input'>
-            {/* <img src={passwordIcon} alt="" className='me-2'/> */}
-            <i className='fa fa-lock me-2' style={{'font-size':'36px'}}></i>
-            <input type="password" placeholder='Confirm Password' className="form-control" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+          <div className='mb-2'>
+            <i className='fa fa-lock me-2 text-3xl'></i>
+            <input
+              type="password"
+              placeholder='Confirm Password'
+              className="form-input"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
           </div>
-          <div className="d-grid">
-            <button className="btn btn-primary" onClick={(e) => signupWithUsernameAndPassword(e)}>Register</button>
+          <div className="mt-4">
+            <button
+              className="btn-primary w-full"
+              onClick={(e) => signupWithUsernameAndPassword(e)}
+            >
+              Register
+            </button>
           </div>
-          <p className='text-end mt-2'>
-            Already registered? <Link to="/login" className='ms-2'>Login</Link>
+          <p className='text-right mt-2'>
+            Already registered? <Link to="/login" className='ml-2 text-blue-500'>Login</Link>
           </p>
         </form>
       </div>
     </div>
   )
+  
 }
 
 export default Register

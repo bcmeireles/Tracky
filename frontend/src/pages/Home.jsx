@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { signOut, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
-import ParcelItem from '../components/ParcelItem';
 import ParcelContainer from '../components/ParcelContainer';
 
 import { toast } from 'react-toastify';

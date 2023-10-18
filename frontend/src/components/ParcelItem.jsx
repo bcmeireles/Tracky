@@ -14,7 +14,7 @@ const ParcelItem = ({ parcel }) => {
       <div className="description p-2 d-flex flex-column">
         <h2 className='name text-center'>{parcel.label}</h2>
         {Object.keys(parcel).map((field, index) => (
-          field !== "label" && field != "_id" && field != "ownerUID" &&
+          field !== "label" && field !== "_id" && field !== "ownerUID" &&
           <p key={index} className='mb-1'>{getFieldLabel(field)}: {parcel[field]}</p>
         ))}
       </div>

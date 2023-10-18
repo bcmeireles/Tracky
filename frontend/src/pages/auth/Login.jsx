@@ -20,7 +20,7 @@ function Login() {
           toast.success('Successfully logged in.');
           navigate('/home')
         } else {
-          toast.info('Please verify your email first.');
+          toast.warning('Please verify your email first.');
           signOut(auth)
             .then(() => {
                 //
@@ -36,30 +36,30 @@ function Login() {
   }
 
   return (
-    <div className="login template d-flex justify-content-center align-items-center vh-100 bg-black">
-      <div className='form_container p-5 rounded bg-white'>
+    <div className="login flex justify-center items-center h-screen bg-black">
+      <div className='form-container p-5 rounded bg-white'>
         <form>
           <h3 className='text-center'>Login</h3>
-          <div className='mb-2 input'>
-            {/* <img src={emailIcon} alt="" className='me-2'/> */}
-            <i className='fa fa-envelope me-2' style={{'font-size':'24px'}}></i>
-            <input type="email" placeholder='Email' className="form-control" onChange={(e)=>setEmail(e.target.value)}/>
+          <div className='mb-2'>
+            <i className='fa fa-envelope me-2' style={{ 'font-size': '24px' }}></i>
+            <input type="email" placeholder='Email' className="form-input" onChange={(e) => setEmail(e.target.value)} />
           </div>
-          <div className='mb-2 input'>
-            {/* <img src={passwordIcon} alt="" className='me-2'/> */}
-            <i className='fa fa-lock me-2' style={{'font-size':'36px'}}></i>
-            <input type="password" placeholder='Password' className="form-control" onChange={(e)=>setPassword(e.target.value)}/>
+          <div className='mb-2'>
+            <i className='fa fa-lock me-2' style={{ 'font-size': '36px' }}></i>
+            <input type="password" placeholder='Password' className="form-input" onChange={(e) => setPassword(e.target.value)} />
           </div>
-          <div className="d-grid">
-            <button className="btn btn-primary" onClick={(e) => onLogin(e)}>Login</button>
+          <div className="mt-4">
+            <button className="btn-primary w-full" onClick={(e) => onLogin(e)}>Login</button>
           </div>
-          <p className='text-end mt-2'>
-            Forgot <a href=''>Password?</a><Link to="/register" className='ms-2'>Register</Link>
+          <p className='text-right mt-2 grid'>
+            <a href='/resetpassword' className='text-blue-500'>Forgot Password? Click here</a>
+            <Link to="/register" className='ml-2 text-blue-500'>Register</Link>
           </p>
         </form>
       </div>
     </div>
   )
+  
 }
 
 export default Login
