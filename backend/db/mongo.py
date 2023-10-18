@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 import json
 from models.ctt import CTT
 from models.paack import PAACK
@@ -19,14 +20,11 @@ def getAllParcels(uid):
 
     return parcels
 
-def getParcel(uid, trackingID):
-    for collection in db.list_collection_names():
-        parcel = db[collection].find_one({'trackingID': trackingID, 'ownerUID': uid})
-        if parcel:
-            parcel['_id'] = str(parcel['_id'])
-            return parcel
-
-    return None
+def getParcel(courier, id):
+    parcel = db[courier].find_one({'_id': ObjectId(id)})
+    parcel['_id'] = str(parcel['_id'])
+    return parcel
+    
 
 def createParcel(label, uid, trackingID, courier):
     if courier == 'ctt':

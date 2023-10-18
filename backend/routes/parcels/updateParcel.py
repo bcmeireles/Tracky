@@ -13,7 +13,7 @@ def create_routes(app):
             return make_response({"requestStatus": "error", "message": "Missing parameters."}, 400)
 
         try:
-            existingParcel = mongo.getParcel(uid, trackingID)
+            existingParcel = mongo.getParcel(uid, courier, trackingID)
 
             if existingParcel:
                 if mongo.updateParcel(uid, trackingID, courier, newDetails):

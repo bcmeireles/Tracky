@@ -92,6 +92,41 @@ function Home() {
         });
     }, []);
 
+    const handleDeleteParcel = (parcelId) => {
+        setParcels((prevParcels) => prevParcels.filter((parcel) => parcel._id !== parcelId));
+    };
+
+    async function fetchUpdatedParcelData(parcelId, parcelCourier) {
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/parcels/getone?id=${parcelId}&courier=${parcelCourier}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch updated parcel data');
+            }
+            const data = await response.json();
+            return data.parcel;
+        } catch (error) {
+            console.error('Error fetching updated parcel data:', error);
+            throw error;
+        }
+    }
+
+    const handleUpdateParcel = async (parcelId, courier) => {
+        try {
+            const updatedParcelData = await fetchUpdatedParcelData(parcelId, courier);
+
+            setParcels((prevParcels) =>
+                prevParcels.map((parcel) =>
+                    parcel._id === parcelId
+                        ? { ...parcel, ...updatedParcelData }
+                        : parcel
+                )
+            );
+        } catch (error) {
+            console.error('Error updating parcel:', error);
+            throw error;
+        }
+    };
+
 
     return (
         <div>
@@ -99,7 +134,7 @@ function Home() {
             <button onClick={handleLogout}>Logout</button>
             <button onClick={handleCreateParcel}>Create Parcel</button>
 
-            <ParcelContainer parcels={parcels} />
+            <ParcelContainer parcels={parcels} onDeleteParcel={handleDeleteParcel} onUpdateParcel={handleUpdateParcel} />
 
             <Modal
                 isOpen={isModalOpen}

@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from routes.getTracking import ctt, ups, paack, yunexpress, correosexpress
-from routes.parcels import getParcels, createParcel, deleteParcel, updateParcel
+from routes.parcels import getParcels, createParcel, deleteParcel, updateParcel, getParcel
 from routes.updateTracking import ctt as cttUpdater
 from routes.updateTracking import ups as upsUpdater
 from routes.updateTracking import paack as paackUpdater
@@ -22,6 +22,7 @@ getParcels.create_routes(app)
 createParcel.create_routes(app)
 deleteParcel.create_routes(app)
 updateParcel.create_routes(app)
+getParcel.create_routes(app)
 
 cttUpdater.create_routes(app)
 upsUpdater.create_routes(app)

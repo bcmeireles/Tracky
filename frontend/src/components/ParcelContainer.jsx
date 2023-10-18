@@ -1,15 +1,19 @@
-import React from 'react'
-import ParcelItem from './ParcelItem'
+import React from 'react';
+import ParcelItem from './ParcelItem';
 
-
-function ParcelContainer({parcels}) {
-  return (
-    <div className="container h-screen m-0">
-        {parcels.map((parcel, index) => (
-              <ParcelItem key={index} parcel={parcel} />
+function ParcelContainer({ parcels, onDeleteParcel, onUpdateParcel }) {
+    return (
+        <div className="container h-screen m-0">
+            {parcels.map((parcel, index) => (
+                <ParcelItem
+                    key={index}
+                    parcel={parcel}
+                    onDeleteParcel={onDeleteParcel}
+                    onUpdateParcel={onUpdateParcel}
+                />
             ))}
-    </div>
-  )
+        </div>
+    );
 }
 
-export default ParcelContainer
+export default ParcelContainer;
