@@ -26,7 +26,7 @@ function Navbar({ handleCreateParcel, handleLogout, isDarkMode, onChangeMode }) 
             <input type="checkbox" checked={isDarkMode} onChange={onChangeMode} />
             <span className="slider round">
               <i
-                className={`fa ${isDarkMode ? 'fa-moon-o' : 'fa-sun-o'} text-white hover:underline`}
+                className={`fa ${isDarkMode ? 'fa-moon-o' : 'fa-sun-o'} text-white`}
                 style={{
                   position: 'absolute',
                   top: '50%',
