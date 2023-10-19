@@ -121,9 +121,17 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel }) => {
 
   const timeAgo = calculateTimeAgo();
 
-  const trackingLinkBuilder = (courier, trackingID) => {
-    if (courier === 'ctt') {
-      return `https://appserver.ctt.pt/CustomerArea/PublicArea_Detail?IsFromPublicArea=true&ObjectCodeInput=${trackingID}&SearchInput=${trackingID}`
+  const trackingLinkBuilder = (parcel) => {
+    if (parcel.courier === 'correosexpress') {
+      return `https://s.correosexpress.com/SeguimientoSinCP/search?shippingNumber=${parcel.trackingID}`;
+    } else if (parcel.courier === 'ctt') {
+      return `https://appserver.ctt.pt/CustomerArea/PublicArea_Detail?IsFromPublicArea=true&ObjectCodeInput=${parcel.trackingID}&SearchInput=${parcel.trackingID}`;
+    } else if (parcel.courier === 'paack') {
+      return `https://mydeliveries.paack.app/tracking/order?tracking_number=${parcel.trackingID}&postal_code=${parcel.postalCode}`;
+    } else if (parcel.courier === 'ups') {
+      return `https://www.ups.com/track?loc=pt_PT&Requester=SBN&tracknum=${parcel.trackingID}&AgreeToTermsAndConditions=yes/trackdetails`;
+    } else if (parcel.courier === 'yunexpress') {
+      return `https://m.yuntrack.com/parcelTracking?id=${parcel.trackingID}`;
     }
   }
 
@@ -132,7 +140,7 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel }) => {
       <h3 className="text-xl font-semibold mb-2 relative text-center flex items-center">
         <img src={`/${parcel.courier}.png`} alt={parcel.courier} className="mr-2 courier-logo" /> {parcel.label}
         <div className='absolute top-0 right-0'>
-          <a href={trackingLinkBuilder(parcel.courier, parcel.trackingID)} target="_blank" rel="noopener noreferrer">
+          <a href={trackingLinkBuilder(parcel)} target="_blank" rel="noopener noreferrer">
             <i className="fa fa-external-link text-gray-600 hover:text-blue-500" style={{ cursor: 'pointer' }}></i>
           </a>
         </div>
