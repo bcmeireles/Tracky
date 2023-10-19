@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
 
@@ -11,16 +11,20 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  const handleChangeMode = () => {
+    setIsDarkMode(!isDarkMode);
+  }
  
   return (
     <Router>
       <div>
         <section>                              
             <Routes>                                                                        
-              <Route path="/" element={<Home/>}/>
+              <Route path="/home" element={<Home onChangeMode={handleChangeMode} isDarkMode={isDarkMode} />}/>
               <Route path="/login" element={<Login/>}/>
               <Route path="/register" element={<Register/>}/>
-              <Route path="/home" element={<Home/>}/>
               <Route path="/resetpassword" element={<ResetPassword/>}/>
             </Routes>                    
         </section>

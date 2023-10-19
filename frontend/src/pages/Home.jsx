@@ -7,7 +7,7 @@ import Modal from 'react-modal'; // Import the modal library
 import { toast } from 'react-toastify';
 import Navbar from '../components/Navbar';
 
-function Home() {
+function Home({onChangeMode, isDarkMode}) {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [parcels, setParcels] = useState([]);
@@ -128,10 +128,9 @@ function Home() {
         }
     };
 
-
     return (
-        <div>
-            <Navbar user={user} parcels={parcels} handleLogout={handleLogout} handleCreateParcel={handleCreateParcel} />
+        <div className={`home-container ${isDarkMode ? 'dark' : 'light'}`}>
+            <Navbar user={user} parcels={parcels} handleLogout={handleLogout} handleCreateParcel={handleCreateParcel} onChangeMode={onChangeMode} isDarkMode={isDarkMode}/>
 
             <ParcelContainer parcels={parcels} onDeleteParcel={handleDeleteParcel} onUpdateParcel={handleUpdateParcel} />
 
