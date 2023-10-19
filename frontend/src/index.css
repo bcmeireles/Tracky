@@ -14,10 +14,12 @@ body {
 
 .dark {
   background: #232b54;
+  height: 100vh;
 }
 
 .light {
   background: #7faef5;
+  height: 100vh;
 }
 
 code {
