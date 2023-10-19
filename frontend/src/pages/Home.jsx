@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import ParcelContainer from '../components/ParcelContainer';
 import Modal from 'react-modal'; // Import the modal library
 import { toast } from 'react-toastify';
+import Navbar from '../components/Navbar';
 
 function Home() {
     const navigate = useNavigate();
@@ -130,9 +131,7 @@ function Home() {
 
     return (
         <div>
-            <p>Welcome {user ? user.uid : 'anon'} you have {parcels.length} {parcels.length === 1 ? 'parcel' : 'parcels'} being tracked</p>
-            <button onClick={handleLogout}>Logout</button>
-            <button onClick={handleCreateParcel}>Create Parcel</button>
+            <Navbar user={user} parcels={parcels} handleLogout={handleLogout} handleCreateParcel={handleCreateParcel} />
 
             <ParcelContainer parcels={parcels} onDeleteParcel={handleDeleteParcel} onUpdateParcel={handleUpdateParcel} />
 
