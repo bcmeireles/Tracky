@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './Navbar.css';
 
 function Navbar({ handleCreateParcel, handleLogout }) {
   const [isDarkMode, setDarkMode] = useState(false);
@@ -21,14 +22,17 @@ function Navbar({ handleCreateParcel, handleLogout }) {
             Go Premium
           </button>
         </div>
-
-        <Link to="/" className="text-white text-xl font-bold">Tracky</Link>
-
         <div className="flex items-center">
-          <label className="text-white mr-2">Light/Dark Mode</label>
           <label className="switch">
+            {/* Display the toggle switch */}
             <input type="checkbox" checked={isDarkMode} onChange={toggleDarkMode} />
-            <span className="slider round"></span>
+            <span className="slider round">
+              {/* Display the sun and moon icons inside the toggle with vertical alignment */}
+              <i
+                className={`fa ${isDarkMode ? 'fa-moon-o' : 'fa-sun-o'} text-white hover:underline`}
+                style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)' }}
+              ></i>
+            </span>
           </label>
           <button onClick={handleLogout} className="text-white hover:underline focus:outline-none ml-4">
             Logout
