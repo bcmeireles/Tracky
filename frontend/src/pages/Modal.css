@@ -1,0 +1,139 @@
+/* Modal.css */
+/* Style the Modal overlay (the background behind the Modal) */
+.ReactModal__Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Style the content of the Modal */
+  .ReactModal__Content {
+    position: relative;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 80%; /* You can adjust the width as needed */
+    max-width: 400px; /* You can set a maximum width if desired */
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s; /* Add a transition for light/dark mode */
+  }
+  
+  /* Style the Modal title */
+  .ReactModal__Content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--text-color); /* Use a CSS variable for text color */
+  }
+  
+  /* Style the form elements inside the Modal */
+  .ReactModal__Content form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Style the input fields */
+  .ReactModal__Content form input {
+    margin: 8px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Style the select element */
+  .ReactModal__Content form select {
+    margin: 8px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Style the submit button */
+  .ReactModal__Content form button {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s; /* Add a transition for button background */
+  }
+  
+  /* Add a hover effect to the submit button */
+  .ReactModal__Content form button:hover {
+    background: #0056b3;
+  }
+  
+
+
+
+
+  /* Dark Mode */
+
+
+
+
+  
+  .ReactModal__Content {
+    position: relative;
+    background: rgb(0, 0, 0);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 80%; /* You can adjust the width as needed */
+    max-width: 400px; /* You can set a maximum width if desired */
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s; /* Add a transition for light/dark mode */
+  }
+  
+  /* Style the Modal title */
+  .ReactModal__Content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: white; /* Use a CSS variable for text color */
+  }
+  
+  /* Style the form elements inside the Modal */
+  .ReactModal__Content form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Style the input fields */
+  .ReactModal__Content form input {
+    margin: 8px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Style the select element */
+  .ReactModal__Content form select {
+    margin: 8px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Style the submit button */
+  .ReactModal__Content form button {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s; /* Add a transition for button background */
+  }
+  
+  /* Add a hover effect to the submit button */
+  .ReactModal__Content form button:hover {
+    background: #0056b3;
+  }
+  

@@ -67,7 +67,7 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel, isDarkMode }) => {
   };
 
   const calculateProgress = () => {
-    if (parcel.progress !== undefined) {
+    if (parcel.progress !== undefined && parcel.progress > 1) {
       return parcel.progress; // Use the provided progress value
     } else if (parcel.status === 'confirmed' || parcel.status === 'waiting' || parcel.status === 'unverified') {
       return 0;

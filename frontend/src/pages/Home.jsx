@@ -6,6 +6,7 @@ import ParcelContainer from '../components/ParcelContainer';
 import Modal from 'react-modal'; // Import the modal library
 import { toast } from 'react-toastify';
 import Navbar from '../components/Navbar';
+import './Modal.css'
 
 function Home({onChangeMode, isDarkMode}) {
     const navigate = useNavigate();
@@ -128,6 +129,8 @@ function Home({onChangeMode, isDarkMode}) {
         }
     };
 
+    const modalClassName = `ReactModal__Content${isDarkMode ? '-dark' : ''}`;
+
     return (
         <div className={`home-container ${isDarkMode ? 'dark' : 'light'}`}>
             <Navbar user={user} parcels={parcels} handleLogout={handleLogout} handleCreateParcel={handleCreateParcel} onChangeMode={onChangeMode} isDarkMode={isDarkMode}/>
@@ -138,6 +141,7 @@ function Home({onChangeMode, isDarkMode}) {
                 isOpen={isModalOpen}
                 onRequestClose={handleModalClose}
                 contentLabel="Create Parcel"
+                className={modalClassName}
             >
                 <h2>Create Parcel</h2>
                 <form onSubmit={handleFormSubmit}>
