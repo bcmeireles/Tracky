@@ -4,18 +4,18 @@ import './Navbar.css';
 
 function Navbar({ handleCreateParcel, handleLogout, isDarkMode, onChangeMode }) {
   return (
-    <nav className={`p-4 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+    <nav className={`p-4 ${isDarkMode ? 'bg-232b54' : 'bg-7faef5'}`}>
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <button
             onClick={handleCreateParcel}
-            className={`text-${isDarkMode ? 'white' : 'black'} hover:underline focus:outline-none ml-4`}
+            className='text-white hover:underline focus:outline-none ml-4'
           >
             Add Parcel
           </button>
           <button
             onClick={handleCreateParcel}
-            className={`text-${isDarkMode ? 'white' : 'black'} hover:underline focus:outline-none ml-4`}
+            className='text-white hover:underline focus:outline-none ml-4'
           >
             Go Premium
           </button>
@@ -39,7 +39,7 @@ function Navbar({ handleCreateParcel, handleLogout, isDarkMode, onChangeMode }) 
           </label>
           <button
             onClick={handleLogout}
-            className={`text-${isDarkMode ? 'white' : 'black'} hover:underline focus:outline-none ml-4`}
+            className='text-white hover:underline focus:outline-none ml-4'
           >
             Logout
           </button>

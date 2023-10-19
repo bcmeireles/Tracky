@@ -1,7 +1,14 @@
 .card {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    background: white;
   }
+
+.card-background-dark {
+  background: #171e29;
+}
+
+.card-background-light {
+  background: white;
+}
 
 .courier-logo {
   max-width: 32px; 

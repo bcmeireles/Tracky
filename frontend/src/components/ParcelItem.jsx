@@ -6,7 +6,7 @@ const getFieldLabel = (fieldName) => {
   return fieldName.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
 };
 
-const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel }) => {
+const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel, isDarkMode }) => {
   const handleUpdateClick = async () => {
     const courier = parcel.courier;
     const updateUrl = `http://127.0.0.1:5000/updateTracking/${courier}`;
@@ -136,12 +136,12 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel }) => {
   }
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md mb-4 flex flex-col justify-between p-30">
+    <div className={`card ${isDarkMode ? 'text-white card-background-dark' : 'text-black card-background-light'} p-4 rounded-lg shadow-md mb-4 flex flex-col justify-between p-30`}>
       <h3 className="text-xl font-semibold mb-2 relative text-center flex items-center">
         <img src={`/${parcel.courier}.png`} alt={parcel.courier} className="mr-2 courier-logo" /> {parcel.label}
         <div className='absolute top-0 right-0'>
           <a href={trackingLinkBuilder(parcel)} target="_blank" rel="noopener noreferrer">
-            <i className="fa fa-external-link text-gray-600 hover:text-blue-500" style={{ cursor: 'pointer' }}></i>
+            <i className={`fa fa-external-link ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} hover:text-blue-500`} style={{ cursor: 'pointer' }}></i>
           </a>
         </div>
       </h3>
@@ -167,7 +167,7 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel }) => {
         >
           Update
         </button>
-        <div className="text-sm text-gray-600 ml-auto">
+        <div className={`text-sm ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} ml-auto`}>
           <div className="text-center">Last checked</div>
           <div className="text-center">{timeAgo}</div>
         </div>

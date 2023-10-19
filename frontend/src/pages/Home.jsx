@@ -132,7 +132,7 @@ function Home({onChangeMode, isDarkMode}) {
         <div className={`home-container ${isDarkMode ? 'dark' : 'light'}`}>
             <Navbar user={user} parcels={parcels} handleLogout={handleLogout} handleCreateParcel={handleCreateParcel} onChangeMode={onChangeMode} isDarkMode={isDarkMode}/>
 
-            <ParcelContainer parcels={parcels} onDeleteParcel={handleDeleteParcel} onUpdateParcel={handleUpdateParcel} />
+            <ParcelContainer parcels={parcels} onDeleteParcel={handleDeleteParcel} onUpdateParcel={handleUpdateParcel} isDarkMode={isDarkMode}/>
 
             <Modal
                 isOpen={isModalOpen}
