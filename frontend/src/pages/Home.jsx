@@ -167,6 +167,7 @@ function Home({onChangeMode, isDarkMode}) {
                         <option value="paack">Paack</option>
                         <option value="ups">UPS</option>
                         <option value="yunexpress">YUN Express</option>
+                        <option value="gls">GLS</option>
                     </select>
                     <button type="submit">Create</button>
                 </form>

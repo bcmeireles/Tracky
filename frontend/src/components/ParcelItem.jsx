@@ -116,6 +116,8 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel, isDarkMode }) => {
       return `${minutes} minutes ago`;
     }
     const hours = Math.floor(minutes / 60);
+    if (hours > 470000)
+      return "Never"
     return `${hours} hours ago`;
   };
 
@@ -132,6 +134,8 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel, isDarkMode }) => {
       return `https://www.ups.com/track?loc=pt_PT&Requester=SBN&tracknum=${parcel.trackingID}&AgreeToTermsAndConditions=yes/trackdetails`;
     } else if (parcel.courier === 'yunexpress') {
       return `https://m.yuntrack.com/parcelTracking?id=${parcel.trackingID}`;
+    } else if (parcel.courier === 'gls') {
+      return `https://www.gls-portugal.pt/pt/seguimiento-envio/?match=${parcel.trackingID}&international=1`
     }
   }
 

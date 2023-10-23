@@ -1,7 +1,8 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
-client = MongoClient('mongodb://tracky-mongo-container-1:27017/')
+#client = MongoClient('mongodb://tracky-mongo-container-1:27017/')
+client = MongoClient('mongodb://localhost:27017/')
 db = client['tracky']
 
 from models.ctt import CTT
@@ -9,6 +10,7 @@ from models.paack import PAACK
 from models.ups import UPS
 from models.yunexpress import YUNEXPRESS
 from models.correosexpress import CORREOSEXPRESS
+from models.gls import GLS
 
 def getAllParcels(uid):
     parcels = []
@@ -45,6 +47,10 @@ def createParcel(label, uid, trackingID, courier):
 
     elif courier == 'correosexpress':
         parcelObj = CORREOSEXPRESS(label, trackingID, uid)
+        parcelObj.save()
+
+    elif courier == 'gls':
+        parcelObj = GLS(label, trackingID, uid)
         parcelObj.save()
 
     return True

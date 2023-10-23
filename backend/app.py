@@ -1,13 +1,13 @@
 from flask import Flask
 from flask_cors import CORS
-from routes.getTracking import ctt, ups, paack, yunexpress, correosexpress
+from routes.getTracking import ctt, ups, paack, yunexpress, correosexpress, gls
 from routes.parcels import getParcels, createParcel, deleteParcel, updateParcel, getParcel
 from routes.updateTracking import ctt as cttUpdater
 from routes.updateTracking import ups as upsUpdater
 from routes.updateTracking import paack as paackUpdater
 from routes.updateTracking import yunexpress as yunexpressUpdater
 from routes.updateTracking import correosexpress as correosexpressUpdater
-
+from routes.updateTracking import gls as glsUpdater
 
 app = Flask(__name__)
 CORS(app)
@@ -17,6 +17,7 @@ ups.create_routes(app)
 paack.create_routes(app)
 yunexpress.create_routes(app)
 correosexpress.create_routes(app)
+gls.create_routes(app)
 
 getParcels.create_routes(app)
 createParcel.create_routes(app)
@@ -29,6 +30,7 @@ upsUpdater.create_routes(app)
 paackUpdater.create_routes(app)
 yunexpressUpdater.create_routes(app)
 correosexpressUpdater.create_routes(app)
+glsUpdater.create_routes(app)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
