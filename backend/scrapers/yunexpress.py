@@ -48,7 +48,7 @@ def trackYunexpress(trackingID='CT108157302DE'):
             "requestStatus": "success",
             "lastUpdateDate": date,
             "lastUpdateTime": time,
-            "status": status,
+            "status": status.lower(),
             "description": orderProgress['ProcessContent'],
             "location": orderProgress['ProcessLocation']
         }

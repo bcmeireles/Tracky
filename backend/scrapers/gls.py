@@ -1,7 +1,7 @@
 import requests, re
 from bs4 import BeautifulSoup
 
-def trackGLS(trackingID='37604864173'):
+def trackGLS(trackingID=''):
     url = f"https://www.gls-portugal.pt/wp-content/plugins/trackin-gls/inc/tracking_code.php?language=en&codigo_in={trackingID}"
 
     response = requests.get(url).json()
