@@ -144,9 +144,14 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel, isDarkMode }) => {
       <h3 className="text-xl font-semibold mb-2 relative text-center flex items-center">
         <img src={`/${parcel.courier}.png`} alt={parcel.courier} className="mr-2 courier-logo" /> {parcel.label}
         <div className='absolute top-0 right-0'>
-          <a href={trackingLinkBuilder(parcel)} target="_blank" rel="noopener noreferrer">
-            <i className={`fa fa-external-link ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} hover:text-blue-500`} style={{ cursor: 'pointer' }}></i>
-          </a>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <a href={trackingLinkBuilder(parcel)} target="_blank" rel="noopener noreferrer">
+              <i className={`fa fa-external-link ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} hover:text-blue-500`} style={{ cursor: 'pointer' }}></i>
+            </a>
+            <a onClick={() => handleDeleteClick(parcel.id)}>
+              <i className={`fa fa-trash ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} hover:text-blue-500`} style={{ cursor: 'pointer' }}></i>
+            </a>
+          </div>
         </div>
       </h3>
       <div className="mb-2">
@@ -159,12 +164,6 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel, isDarkMode }) => {
          {parcel.reason && <p><strong>Reason</strong>: {parcel.reason}</p>}
       </div>
       <div className="mt-4 flex">
-        <button
-          className="bg-red-500 text-white px-3 py-1 rounded-lg mr-2"
-          onClick={() => handleDeleteClick(parcel.id)}
-        >
-          Delete
-        </button>
         <button
           className="bg-blue-500 text-white px-3 py-1 rounded-lg"
           onClick={() => handleUpdateClick(parcel.id)}
