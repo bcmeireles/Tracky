@@ -68,7 +68,7 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel, isDarkMode }) => {
 
   const calculateProgress = () => {
     if (parcel.progress !== undefined && parcel.progress > 1) {
-      return parcel.progress; // Use the provided progress value
+      return parcel.progress; 
     } else if (parcel.status === 'confirmed' || parcel.status === 'waiting' || parcel.status === 'unverified') {
       return 0;
     } else if (parcel.status === 'intransit') {
@@ -77,7 +77,7 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel, isDarkMode }) => {
       return 100;
     }
     console.log(parcel.label)
-    return 50; // Default to 0 if no matching criteria found
+    return 50;
   };
 
   const progressValue = calculateProgress();
@@ -144,7 +144,7 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel, isDarkMode }) => {
       <h3 className="text-xl font-semibold mb-2 relative text-center flex items-center">
         <img src={`/${parcel.courier}.png`} alt={parcel.courier} className="mr-2 courier-logo" /> {parcel.label}
         <div className='absolute top-0 right-0'>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className='flex flex-col'>
             <a href={trackingLinkBuilder(parcel)} target="_blank" rel="noopener noreferrer">
               <i className={`fa fa-external-link ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} hover:text-blue-500`} style={{ cursor: 'pointer' }}></i>
             </a>
@@ -165,8 +165,9 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel, isDarkMode }) => {
       </div>
       <div className="mt-4 flex">
         <button
-          className="bg-blue-500 text-white px-3 py-1 rounded-lg"
+          className={`cursor-pointer border-solid border-2 hover:text-blue-700 ${isDarkMode ? 'text-white' : 'text-black'} px-3 py-1 rounded-lg`}
           onClick={() => handleUpdateClick(parcel.id)}
+          style={{borderColor: `${isDarkMode ? '#232b54' : '#7faef5'}`}}
         >
           Update
         </button>
@@ -178,7 +179,7 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel, isDarkMode }) => {
       <div className={`h-4 mt-4 relative ${getProgressColorClass(1)} rounded-lg`}>
         <div
           className={`h-full ${getProgressColorClass(0)} rounded-lg`}
-          style={{ width: `${progressValue}%` }}
+          style={{width: `${progressValue}%`}}
         ></div>
       </div>
     </div>

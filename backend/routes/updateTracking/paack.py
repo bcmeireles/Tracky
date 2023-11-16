@@ -9,8 +9,10 @@ def create_routes(app):
         data = request.get_json()
         uid = data.get('uid')
         trackingID = data.get('trackingID')
+        postalCode = mongo.getPaackPostal(trackingID)
 
-        data = paackScraper.trackPaack(trackingID)
+        data = paackScraper.trackPaack(trackingID, postalCode)
+
         if data['requestStatus'] == 'success':
             del data['requestStatus']
             data['lastChecked'] = int(time.time())

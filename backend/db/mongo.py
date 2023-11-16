@@ -27,14 +27,16 @@ def getParcel(courier, id):
     parcel['_id'] = str(parcel['_id'])
     return parcel
     
+def getPaackPostal(trackingID):
+    return db['paack'].find_one({'trackingID': trackingID})['postalCode']
 
-def createParcel(label, uid, trackingID, courier):
+def createParcel(label, uid, trackingID, courier, postalCode=''):
     if courier == 'ctt':
         parcelObj = CTT(label, trackingID, uid)
         parcelObj.save()
     
     elif courier == 'paack':
-        parcelObj = PAACK(label, trackingID, uid)
+        parcelObj = PAACK(label, trackingID, postalCode, uid)
         parcelObj.save()
 
     elif courier == 'ups':

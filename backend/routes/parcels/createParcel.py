@@ -9,6 +9,7 @@ def create_routes(app):
         uid = data.get('uid')
         trackingID = data.get('trackingID')
         courier = data.get('courier')
+        postalCode = data.get('postalCode')
 
         print(label, uid, trackingID, courier)
 
@@ -16,15 +17,11 @@ def create_routes(app):
             return make_response(jsonify({"requestStatus": "error", "message": "Missing parameters."}), 400)
 
         try:
-            if mongo.createParcel(label, uid, trackingID, courier):
-                print("aqui1")
+            if mongo.createParcel(label, uid, trackingID, courier, postalCode):
                 return make_response(jsonify({"requestStatus": "success", "message": "Parcel created successfully."}), 200)
             else:
-                print("aqui2")
                 return make_response(jsonify({"requestStatus": "error", "message": "Failed to create parcel."}), 400)
         except Exception as e:
-            print("aqui3")
-            print(e)
             return make_response(jsonify({
                 "requestStatus": "error",
                 "message": str(e)

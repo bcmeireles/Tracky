@@ -2,6 +2,7 @@ import requests, re
 from bs4 import BeautifulSoup
 
 def trackPaack(trackingID='', postalCode=''):
+
     url = f"https://mydeliveries.paack.app/tracking/order?tracking_number={trackingID}&postal_code={postalCode}"
 
     response = requests.get(url)

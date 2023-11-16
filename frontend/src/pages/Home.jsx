@@ -3,7 +3,7 @@ import { signOut, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import ParcelContainer from '../components/ParcelContainer';
-import Modal from 'react-modal'; // Import the modal library
+import Modal from 'react-modal'; 
 import { toast } from 'react-toastify';
 import Navbar from '../components/Navbar';
 import './Modal.css'
@@ -12,11 +12,12 @@ function Home({onChangeMode, isDarkMode}) {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [parcels, setParcels] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false); // To control the modal state
+    const [isModalOpen, setIsModalOpen] = useState(false); 
     const [formData, setFormData] = useState({
         label: '',
         trackingID: '',
-        courier: 'Select Courier', // Default value
+        postalCode: '',
+        courier: 'Select Courier',
     });
 
     const handleCreateParcel = () => {
@@ -28,17 +29,14 @@ function Home({onChangeMode, isDarkMode}) {
     };
 
     const handleFormSubmit = () => {
-        // Check if the required fields are filled
         if (formData.label && formData.trackingID && formData.courier !== 'Select Courier') {
-            // Define the data to send in the request
             const parcelData = {
                 label: formData.label,
                 trackingID: formData.trackingID,
                 courier: formData.courier,
-                uid: user.uid, // Assuming you want to associate the parcel with the logged-in user
+                uid: user.uid,
             };
-    
-            // Send a POST request to create the parcel
+
             fetch('http://localhost:5000/parcels/create', {
                 method: 'POST',
                 headers: {
@@ -47,12 +45,10 @@ function Home({onChangeMode, isDarkMode}) {
                 body: JSON.stringify(parcelData),
             })
                 .then(response => {
+                    console.log(response);
                     if (response.ok) {
-                        // Parcel created successfully
                         toast.success('Parcel created successfully!');
-                        // Close the modal and refresh the parcel list if needed
                         handleModalClose();
-                        // You may want to refresh the parcel list here, e.g., by calling an API to get the updated list
                     } else {
                         toast.error('Parcel creation failed. Please try again.');
                     }
@@ -145,18 +141,6 @@ function Home({onChangeMode, isDarkMode}) {
             >
                 <h2>Create Parcel</h2>
                 <form onSubmit={handleFormSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Label"
-                        value={formData.label}
-                        onChange={(e) => setFormData({ ...formData, label: e.target.value })}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Tracking ID"
-                        value={formData.trackingID}
-                        onChange={(e) => setFormData({ ...formData, trackingID: e.target.value })}
-                    />
                     <select
                         value={formData.courier}
                         onChange={(e) => setFormData({ ...formData, courier: e.target.value })}
@@ -169,6 +153,29 @@ function Home({onChangeMode, isDarkMode}) {
                         <option value="yunexpress">YUN Express</option>
                         <option value="gls">GLS</option>
                     </select>
+
+                    <input
+                        type="text"
+                        placeholder="Label"
+                        value={formData.label}
+                        onChange={(e) => setFormData({ ...formData, label: e.target.value })}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Tracking ID"
+                        value={formData.trackingID}
+                        onChange={(e) => setFormData({ ...formData, trackingID: e.target.value })}
+                    />
+
+                    {formData.courier === "paack" && (
+                        <input
+                            type="text"
+                            placeholder="Postal Code"
+                            value={formData.postalCode}
+                            onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
+                        />
+                    )}
+                    
                     <button type="submit">Create</button>
                 </form>
             </Modal>

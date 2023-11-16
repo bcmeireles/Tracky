@@ -15,7 +15,7 @@
   /* Style the content of the Modal */
   .ReactModal__Content {
     position: relative;
-    background: white;
+    background: #7faef5;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     padding: 20px;
@@ -82,7 +82,7 @@
   
   .ReactModal__Content {
     position: relative;
-    background: rgb(0, 0, 0);
+    background: #232b54;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     padding: 20px;
