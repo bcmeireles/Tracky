@@ -73,7 +73,7 @@ const ParcelItem = ({ parcel, onDeleteParcel, onUpdateParcel, isDarkMode }) => {
       return 0;
     } else if (parcel.status === 'intransit') {
       return 50;
-    } else if (parcel.status === 'delivered') {
+    } else if (parcel.status === 'delivered' || parcel.status === 'Order delivered!') {
       return 100;
     }
     console.log(parcel.label)
